@@ -1,0 +1,45 @@
+from collections import deque
+
+class Graph:
+    def __init__(self, vertices):
+        self.v = vertices
+        self.graph = {i: [] for i in range(vertices)}
+
+    def add_edge(self, u, v):
+        # Undirected graph → add both ways
+        self.graph[u].append(v)
+        self.graph[v].append(u)
+
+    def bfs(self, start):
+        visited = [False] * self.v
+        queue = deque()
+
+        visited[start] = True
+        queue.append(start)
+
+        print("BFS Traversal:")
+
+        while queue:
+            node = queue.popleft()
+            print(node, end=" ")
+
+            for neighbor in self.graph[node]:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    queue.append(neighbor)
+
+
+# 🔷 User Input Section
+vertices = int(input("Enter number of vertices: "))
+edges = int(input("Enter number of edges: "))
+
+g = Graph(vertices)
+
+print("Enter edges (u v):")
+for _ in range(edges):
+    u, v = map(int, input().split())
+    g.add_edge(u, v)
+
+start = int(input("Enter starting vertex for BFS: "))
+
+g.bfs(start)
