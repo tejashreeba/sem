@@ -1,0 +1,30 @@
+V = int(input("Enter number of vertices: "))   
+print("Enter Adjacency matrix: ")
+graph = []    #create empty list this will store matrix
+for i in range(V):
+    row = list(map(int,input().split()))
+    #takes string input splits by space convert to int then list and form row
+    graph.append(row)    #add this row to graph
+
+
+selected = [False]*V
+selected[0] = True
+
+print("Edge : Weight")
+
+for _ in range(V-1):
+    minimum = 9999
+    x = 0
+    y = 0
+    
+    for i in range(V):
+        if selected[i]:
+            for j in range(V):
+                if((not selected[j]) and graph[i][j] != 0):
+                    if minimum > graph[i][j]:
+                        minimum = graph[i][j]
+                        x = i
+                        y = j
+                        
+    print(x,"-",y,":",graph[x][y])
+    selected[y] = True
