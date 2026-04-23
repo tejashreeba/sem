@@ -1,45 +1,40 @@
 from collections import deque
 
-class Graph:
-    def __init__(self, vertices):
-        self.v = vertices
-        self.graph = {i: [] for i in range(vertices)}
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
 
-    def add_edge(self, u, v):
-        # Undirected graph → add both ways
-        self.graph[u].append(v)
-        self.graph[v].append(u)
+    print("BFS Traversal:")
 
-    def bfs(self, start):
-        visited = [False] * self.v
-        queue = deque()
+    while queue:
+        node = queue.popleft()
+        print(node, end=" ")
 
-        visited[start] = True
-        queue.append(start)
-
-        print("BFS Traversal:")
-
-        while queue:
-            node = queue.popleft()
-            print(node, end=" ")
-
-            for neighbor in self.graph[node]:
-                if not visited[neighbor]:
-                    visited[neighbor] = True
-                    queue.append(neighbor)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
 
 
-# 🔷 User Input Section
-vertices = int(input("Enter number of vertices: "))
+# 🔷 User Input
+graph = {}
+
 edges = int(input("Enter number of edges: "))
-
-g = Graph(vertices)
-
 print("Enter edges (u v):")
+
 for _ in range(edges):
-    u, v = map(int, input().split())
-    g.add_edge(u, v)
+    u, v = input().split()
 
-start = int(input("Enter starting vertex for BFS: "))
+    # ✅ create keys if not present
+    if u not in graph:
+        graph[u] = []
+    if v not in graph:
+        graph[v] = []
 
-g.bfs(start)
+    graph[u].append(v)
+    graph[v].append(u)   # undirected graph
+
+start = input("Enter starting vertex: ")
+
+bfs(graph, start)
