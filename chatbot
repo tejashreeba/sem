@@ -1,0 +1,97 @@
+# Menu Driven Customer Support Chatbot with Time
+
+# importing datetime module
+from datetime import datetime
+
+
+# Function for welcome message
+def welcome():
+
+    print("================================")
+    print(" CUSTOMER SUPPORT CHATBOT ")
+    print("================================")
+
+    # getting current hour
+    current_hour = datetime.now().hour
+
+    # checking time
+    if current_hour >= 5 and current_hour < 12:
+       print("Good Morning!")
+
+    elif current_hour >= 12 and current_hour < 17:
+        print("Good Afternoon!")
+
+    elif current_hour >= 17 and current_hour < 21:
+        print("Good Evening!")
+
+    else:
+        print("Good Night!")
+
+# Function to display menu
+def show_menu():
+
+    print("\nChoose an option:")
+    print("1. Order Status")
+    print("2. Refund")
+    print("3. Delivery")
+    print("4. Payment")
+    print("5. Current Time")
+    print("6. Exit")
+
+
+# Function to give chatbot reply
+def chatbot_reply(choice):
+
+    if choice == "1":
+        return "Your order will arrive in 3 to 5 days."
+
+    elif choice == "2":
+        return "Refund will be processed within 7 days."
+
+    elif choice == "3":
+        return "Delivery is free above 500 rupees."
+
+    elif choice == "4":
+        return "We accept UPI, Debit Card and Credit Card."
+
+    elif choice == "5":
+
+        # getting current time
+        current_time = datetime.now().strftime("%H:%M:%S")
+
+        return "Current Time is: " + current_time
+
+    elif choice == "6":
+        return "Thank you for visiting. Goodbye!"
+
+    else:
+        return "Invalid choice. Please enter number between 1 to 6."
+
+
+# Main function
+def main():
+
+    # calling welcome function
+    welcome()
+
+    while True:
+
+        # showing menu
+        show_menu()
+
+        # taking user choice
+        user_choice = input("Enter your choice: ")
+
+        # getting chatbot response
+        response = chatbot_reply(user_choice)
+
+        # printing response
+        print("\nBot:", response)
+
+        # stopping chatbot
+        if user_choice == "6":
+            break
+
+
+# starting program
+main()
