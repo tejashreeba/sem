@@ -20,6 +20,12 @@ def bfs(graph, start):
 # 🔷 User Input
 graph = {}
 
+vertex = int(input("Enter number of vertices: "))
+print("Enter vertices: ")
+for i in range(vertex):
+    v = input()
+    graph[v] = []
+
 edges = int(input("Enter number of edges: "))
 print("Enter edges (u v):")
 
