@@ -8,7 +8,8 @@ for i in range(V):
 
 
 selected = [False]*V
-selected[0] = True
+start = int(input("Enter starting vertex: "))
+selected[start] = True
 
 print("Edge : Weight")
 
