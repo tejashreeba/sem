@@ -1,0 +1,60 @@
+V=int(input("Enter number of vertices: "))
+print("enter adjacency matrix : ")
+graph =[]
+for i in range(V):
+    row = list(map(int,input().split()))
+    graph.append(row)
+    
+edges = []
+for i in range(V):
+    for j in range(i+1,V):
+        if graph[i][j] != 0:
+            edges.append([graph[i][j],i,j])
+            
+edges.sort()
+
+parent = []
+for i in range(V):
+    parent.append(i)
+    
+def find(i):
+    while parent[i] != i:
+        i = parent[i]
+    return i
+
+    
+def union(a,b):
+    parent[a] = b
+    
+print("Edge: Weight")
+count = 0
+index = 0       #which edge currently checking
+
+while count < V-1:
+    weight,x,y = edges[index]
+    index +=1
+    a = find(x)
+    b = find(y)   #find root
+    if a != b:
+        print(x,"-",y,":",weight)
+        union(a,b)
+        count += 1
+    
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
