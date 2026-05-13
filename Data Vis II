@@ -1,0 +1,17 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = sns.load_dataset('titanic')
+
+df.isnull().sum()
+df = df.dropna(subset = ['age'])
+
+sns.boxplot(data=df,x='sex',y='age',hue='survived')
+plt.xlabel("Gender")
+plt.ylabel("Age")
+plt.title("Distribution of age by Gender and Survival status")
+plt.show()
+
+sns.boxplot(data=df,x='sex',y='age')
