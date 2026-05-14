@@ -31,10 +31,9 @@ df['Age'] = df['Age'].fillna(df['Age'].mean())
 df['Age'] = df['Age'].astype(int)
 
 # Normalization
-df['Fare'] = (
-    (df['Fare'] - df['Fare'].min()) /
-    (df['Fare'].max() - df['Fare'].min())
-)
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+df[['age','fare']] = scaler.fit_transform(df[['age','fare']])
 
 # Convert categorical variable
 df['Sex'] = df['Sex'].map({
