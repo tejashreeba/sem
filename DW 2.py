@@ -34,12 +34,13 @@ upper_bound = Q3+1.5*IQR
 outliers = df[(df['Maths'] < lower_bound) | (df['Maths'] > upper_bound)]
 outliers
 
-sns.histplot(data=df,x='Attendance')
-plt.show()
-df['Attendance_log'] = np.log(df['Attendance'])
+from sklearn.preprocessing import MinMaxScaler
 
-sns.histplot(data=df,x='Attendance_log')
-plt.show()
+scaler = MinMaxScaler()
+
+df[['Attendance']] = scaler.fit_transform(df[['Attendance']])
+
+print(df)
 
 
 
